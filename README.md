@@ -11,5 +11,7 @@ Solve every day's puzzle using Verilog + icestick FPGA.
 ## Build
 
 ```
-make simulate-day01
+make simulate-day01-part1
+make simulate-day01-part2
+...
 ```
