@@ -1,4 +1,4 @@
-module day01_part2(
+module part2 (
   clk,
   en,
   result
@@ -21,8 +21,8 @@ wire signed [63:0] temp2;
 
 reg done;
 
-rom_day01 rom1 (.address(wrapped_counter1), .en(en), .data(temp1));
-rom_day01 rom2 (.address(wrapped_counter2), .en(en), .data(temp2));
+rom rom1 (.address(wrapped_counter1), .en(en), .data(temp1));
+rom rom2 (.address(wrapped_counter2), .en(en), .data(temp2));
 
 always @(posedge clk)
   begin

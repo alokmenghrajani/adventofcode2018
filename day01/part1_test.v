@@ -1,10 +1,10 @@
-module day01_part1_test;
+module part1_test;
 
   reg clk = 0;
   reg en = 0;
   wire signed [63:0] result;
 
-  day01_part1 dut (.clk(clk), .en(en), .result(result));
+  part1 dut (.clk(clk), .en(en), .result(result));
 
   always #5 clk = !clk;
 
