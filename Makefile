@@ -13,3 +13,4 @@ simulate-day01-part2:
 
 test:
 	$(RUN) /bin/sh -c "iverilog -s half_adder_test lib/half_adder.v lib/half_adder_test.v && ./a.out"
+	$(RUN) /bin/sh -c "iverilog -s full_adder_test lib/half_adder.v lib/full_adder.v lib/full_adder_test.v && ./a.out"
