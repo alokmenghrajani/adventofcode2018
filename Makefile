@@ -10,3 +10,6 @@ simulate-day01-part1:
 simulate-day01-part2:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "iverilog -s day01_part2_test rom_day01.v day01_part2.v day01_part2_test.v && ./a.out"
+
+test:
+	$(RUN) /bin/sh -c "iverilog -s half_adder_test lib/half_adder.v lib/half_adder_test.v && ./a.out"
