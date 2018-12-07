@@ -67,6 +67,41 @@ def day02
   f.close
 end
 
+def day03
+  # We'll create a 10-bit address and 4 x 10-bit data rom.
+  f = File.new('inputs/day03.txt', 'r')
+  o = File.new('day03/rom.v', 'w+')
+
+  o.puts("module rom (")
+  o.puts("  address, // address input")
+  o.puts("  en,      // enable input")
+  o.puts("  data     // data output")
+  o.puts(");")
+  o.puts("input [10:0] address;")
+  o.puts("input en;")
+  o.puts("output [0:3][9:0] data;")
+  o.puts("reg [0:3][9:0] data;")
+  o.puts("always @ (en or address)")
+  o.puts("begin")
+  o.puts("  case (address)")
+
+  address = 0
+  while (line = f.gets)
+    l = line.chomp
+    o.puts("    #{address}:")
+    m = /#\d+ @ (\d+),(\d+): (\d+)x(\d+)/.match(l)
+    o.puts("       data = {10'd#{m[1]}, 10'd#{m[2]}, 10'd#{m[3]}, 10'd#{m[4]}};")
+    address += 1
+  end
+  o.puts("  endcase")
+  o.puts("end")
+  o.puts("endmodule")
+
+  o.close
+  f.close
+end
+
 
 day01()
 day02()
+day03()
