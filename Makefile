@@ -3,6 +3,13 @@ RUN := docker run -v ${CURDIR}:/workdir openfpga/toolchain
 dev:
 	docker run -it -v ${CURDIR}:/workdir openfpga/toolchain /bin/sh
 
+exp: exp/rotate.v exp/rotate_test.v
+	$(RUN) /bin/sh -c "iverilog -s rotate_test exp/rotate.v exp/rotate_test.v && /usr/local/bin/vvp -n ./a.out"
+	$(RUN) /bin/sh -c "yosys -p 'synth_ice40 -blif out/rotate.blif' exp/rotate.v"
+	$(RUN) /bin/sh -c "arachne-pnr -d 1k -p icestick/pins.pcf out/rotate.blif -o out/rotate.txt"
+	$(RUN) /bin/sh -c "icepack out/rotate.txt out/rotate.bin"
+	iceprog out/rotate.bin
+
 simulate-day01-part1:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "iverilog -s part1_test day01/rom.v day01/part1.v day01/part1_test.v && /usr/local/bin/vvp -n ./a.out"
