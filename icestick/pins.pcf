@@ -11,11 +11,11 @@
 set_io --warn-no-port clk 21   # 12 MHz clock
 
 # LEDs
-set_io --warn-no-port LED1 99  # red
-set_io --warn-no-port LED2 98  # red
-set_io --warn-no-port LED3 97  # red
-set_io --warn-no-port LED4 96  # red
-set_io --warn-no-port LED5 95  # green
+set_io --warn-no-port LED1 99  # red (top)
+set_io --warn-no-port LED2 98  # red (right)
+set_io --warn-no-port LED3 97  # red (bottom)
+set_io --warn-no-port LED4 96  # red (left)
+set_io --warn-no-port LED5 95  # green (center)
 
 # IRDA interface
 set_io --warn-no-port IRRXD 106
@@ -31,10 +31,10 @@ set_io --warn-no-port SPI_SS 71
 # J1
 # set_io --warn-no-port J1_1  3.3V
 # set_io --warn-no-port J1_2 GND
-set_io --warn-no-port J1_3 112  # PIO0_02 
-set_io --warn-no-port J1_4 113  # PIO0_03 
-set_io --warn-no-port J1_5 114  # PIO0_04 
-set_io --warn-no-port J1_6 115  # PIO0_05 
+set_io --warn-no-port J1_3 112  # PIO0_02
+set_io --warn-no-port J1_4 113  # PIO0_03
+set_io --warn-no-port J1_5 114  # PIO0_04
+set_io --warn-no-port J1_6 115  # PIO0_05
 set_io --warn-no-port J1_7 116  # PIO0_06 PMOD pin 7
 set_io --warn-no-port J1_8 117  # PIO0_07 PMOD pin 8
 set_io --warn-no-port J1_9 118  # PIO0_08 PMOD pin 9

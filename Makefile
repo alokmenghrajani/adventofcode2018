@@ -33,8 +33,16 @@ simulate-day03-part1:
 	$(RUN) /bin/sh -c "iverilog -s overlap_test day03/overlap.v day03/overlap_test.v && /usr/local/bin/vvp -n ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s part1_test lib/plain_counter.v day03/rom.v day03/overlap.v day03/part1.v day03/part1_test.v && /usr/local/bin/vvp -n ./a.out"
 
+day03-part1:
+	ruby gen.rb
+	$(RUN) /bin/sh -c "yosys -p 'synth_ice40 -blif out/day03_part1.blif' lib/plain_counter.v day03/rom.v day03/overlap.v day03/part1.v"
+	$(RUN) /bin/sh -c "arachne-pnr -d 1k -p icestick/pins.pcf out/day03_part1.blif -o out/day03_part1.txt"
+	$(RUN) /bin/sh -c "icepack out/day03_part1.txt out/day03_part1.bin"
+	iceprog out/day03_part1.bin
+
 test:
 	$(RUN) /bin/sh -c "iverilog -s half_adder_test lib/half_adder.v lib/half_adder_test.v && /usr/local/bin/vvp -n ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s full_adder_test lib/half_adder.v lib/full_adder.v lib/full_adder_test.v && /usr/local/bin/vvp -n ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s bit_counter_test lib/half_adder.v lib/bit_counter.v lib/bit_counter_test.v && /usr/local/bin/vvp -n ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s plain_counter_test lib/plain_counter.v lib/plain_counter_test.v && /usr/local/bin/vvp -n ./a.out"
+	$(RUN) /bin/sh -c "iverilog -s data_exporter_test lib/plain_counter.v lib/data_exporter.v lib/data_exporter_test.v && /usr/local/bin/vvp -n ./a.out"
