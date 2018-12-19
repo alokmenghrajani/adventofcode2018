@@ -9,6 +9,7 @@ module part1_test;
 
   initial begin
     $display("start");
+    #10
     $monitor("overlaps=", dut.overlaps, ", done=", dut.done, ", counter3=", dut.counter3);
   end
 endmodule

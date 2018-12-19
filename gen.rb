@@ -77,14 +77,14 @@ def day03
   o.puts("  input wire [10:0] addr,")
   o.puts("  output reg [9:0] left,")
   o.puts("  output reg [9:0] top,")
-  o.puts("  output reg [9:0] w,")
-  o.puts("  output reg [9:0] h")
+  o.puts("  output reg [4:0] w,")
+  o.puts("  output reg [4:0] h")
   o.puts(");")
   o.puts("")
   o.puts("reg [9:0] rom0 [1236:0];")
   o.puts("reg [9:0] rom1 [1236:0];")
-  o.puts("reg [9:0] rom2 [1236:0];")
-  o.puts("reg [9:0] rom3 [1236:0];")
+  o.puts("reg [4:0] rom2 [1236:0];")
+  o.puts("reg [4:0] rom3 [1236:0];")
   o.puts("always @ (negedge clk) begin")
   o.puts("  left <= rom0[addr];")
   o.puts("  top <= rom1[addr];")
@@ -97,15 +97,14 @@ def day03
   while (line = f.gets)
     l = line.chomp
     m = /#\d+ @ (\d+),(\d+): (\d+)x(\d+)/.match(l)
-    o.puts("  rom0[#{address}] = 10'd#{m[1]};")
-    o.puts("  rom1[#{address}] = 10'd#{m[2]};")
-    o.puts("  rom2[#{address}] = 10'd#{m[3]};")
-    o.puts("  rom3[#{address}] = 10'd#{m[4]};")
+    o.puts("  rom0[#{address}] <= 10'd#{m[1]};")
+    o.puts("  rom1[#{address}] <= 10'd#{m[2]};")
+    o.puts("  rom2[#{address}] <= 5'd#{m[3]};")
+    o.puts("  rom3[#{address}] <= 5'd#{m[4]};")
     address += 1
   end
   o.puts("end")
   o.puts("endmodule")
-
   o.close
   f.close
 end

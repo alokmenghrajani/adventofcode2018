@@ -10,7 +10,7 @@
  * In the future, I might replace this module with a UART. I ran into some UART issues with my first board (which no
  * longer works, so I'd rather avoid UART for now).
  */
-module data_exporter #(parameter WIDTH=24, VAL=12000000) (
+module data_exporter #(parameter WIDTH=26, VAL=48000000) (
   input wire clk,
   input wire en,
   input wire [27:0] data,

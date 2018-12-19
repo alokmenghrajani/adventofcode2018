@@ -1,8 +1,8 @@
 module overlap (
   input wire [9:0] left,
   input wire [9:0] top,
-  input wire [9:0] w,
-  input wire [9:0] h,
+  input wire [4:0] w,
+  input wire [4:0] h,
   input wire [9:0] x,
   input wire [9:0] y,
   output wire r

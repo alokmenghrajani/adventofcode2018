@@ -2,8 +2,8 @@ module overlap_test;
 
   reg [9:0] left;
   reg [9:0] top;
-  reg [9:0] w;
-  reg [9:0] h;
+  reg [4:0] w;
+  reg [4:0] h;
 
   reg [9:0] x;
   reg [9:0] y;
@@ -16,8 +16,8 @@ module overlap_test;
 
     left = 10'd3;
     top = 10'd1;
-    w = 10'd4;
-    h = 10'd4;
+    w = 5'd4;
+    h = 5'd4;
     x = 4; y = 4; #10
     if (r != 1)
       $display("failed pos=", left, top, w, h, ", x=", x, ", y=", y, ", r=", r);
