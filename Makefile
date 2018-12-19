@@ -33,6 +33,10 @@ simulate-day03-part1:
 	$(RUN) /bin/sh -c "iverilog -s overlap_test day03/overlap.v day03/overlap_test.v && /usr/local/bin/vvp -n ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s part1_test lib/plain_counter.v lib/data_exporter.v day03/rom.v day03/overlap.v day03/part1.v day03/part1_test.v && /usr/local/bin/vvp -n ./a.out"
 
+simulate-day03-part2:
+	ruby gen.rb
+	$(RUN) /bin/sh -c "iverilog -s part2_test lib/plain_counter.v lib/data_exporter.v day03/rom.v day03/part2.v day03/part2_test.v && /usr/local/bin/vvp -n ./a.out"
+
 day03-part1:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "yosys -p 'synth_ice40 -blif out/day03_part1.blif' lib/data_exporter.v lib/plain_counter.v day03/rom.v day03/overlap.v day03/part1.v"
