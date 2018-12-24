@@ -10,6 +10,8 @@ exp: exp/rotate.v exp/rotate_test.v
 	$(RUN) /bin/sh -c "icepack out/rotate.txt out/rotate.bin"
 	iceprog out/rotate.bin
 
+# Day 01
+
 simulate-day01-part1:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "iverilog -s part1_test day01/rom.v day01/part1.v day01/part1_test.v && /usr/local/bin/vvp -n ./a.out"
@@ -17,6 +19,8 @@ simulate-day01-part1:
 simulate-day01-part2:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "iverilog -s part2_test day01/rom.v day01/part2.v day01/part2_test.v && /usr/local/bin/vvp -n ./a.out"
+
+# Day 02
 
 simulate-day02-part1:
 	ruby gen.rb
@@ -27,6 +31,8 @@ simulate-day02-part2:
 	ruby gen.rb
 	$(RUN) /bin/sh -c "iverilog -s delta_test lib/half_adder.v lib/bit_counter.v day02/delta.v day02/delta_test.v && ./a.out"
 	$(RUN) /bin/sh -c "iverilog -s part2_test lib/half_adder.v lib/bit_counter.v day02/delta.v day02/rom.v day02/part2.v day02/part2_test.v && /usr/local/bin/vvp -n ./a.out"
+
+# Day 03
 
 simulate-day03-part1:
 	ruby gen.rb
@@ -43,6 +49,17 @@ day03-part1:
 	$(RUN) /bin/sh -c "arachne-pnr -d 1k -p icestick/pins.pcf out/day03_part1.blif -o out/day03_part1.txt"
 	$(RUN) /bin/sh -c "icepack out/day03_part1.txt out/day03_part1.bin"
 	iceprog out/day03_part1.bin
+
+# Day 18
+
+simulate-day-18-part1:
+	ruby gen.rb
+	$(RUN) /bin/sh -c "iverilog -s acre_test lib/half_adder.v lib/bit_counter.v day18/acre.v day18/acre_test.v && /usr/local/bin/vvp -n ./a.out"
+	$(RUN) /bin/sh -c "iverilog -s part1_test lib/half_adder.v lib/bit_counter.v day18/acre.v day18/field.v day18/part1_test.v && /usr/local/bin/vvp -n ./a.out"
+
+simulate-day-18-part2:
+	ruby gen.rb
+	$(RUN) /bin/sh -c "iverilog -s part2_test lib/half_adder.v lib/bit_counter.v day18/acre.v day18/field.v day18/part2_test.v && /usr/local/bin/vvp -n ./a.out"
 
 test:
 	$(RUN) /bin/sh -c "iverilog -s half_adder_test lib/half_adder.v lib/half_adder_test.v && /usr/local/bin/vvp -n ./a.out"

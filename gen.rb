@@ -109,7 +109,80 @@ def day03
   f.close
 end
 
+def day18
+  # Read input file
+  f = File.new('inputs/day18.txt', 'r')
+  arr = []
+  while (line = f.gets)
+    l = line.chomp
+    arr.push(l.split(''))
+  end
+  f.close
+
+  size = arr.length
+
+  # generate output
+  o = File.new('day18/field.v', 'w+')
+
+  o.puts("module field (")
+  o.puts("  input wire clk,")
+  o.puts("  input wire en,")
+  o.puts("  output wire [#{size*size-1}:0] trees,")
+  o.puts("  output wire [#{size*size-1}:0] lumberyards")
+  o.puts(");")
+  o.puts("")
+
+  for x in 0..(size-1) do
+    for y in 0..(size-1) do
+      case arr[x][y]
+      when '.'
+        init = "2'b00"
+      when '|'
+        init = "2'b10"
+      when '#'
+        init = "2'b01"
+      end
+      top_left = "{trees[#{(x-1)*size+(y-1)}], lumberyards[#{(x-1)*size+(y-1)}]}"
+      top = "{trees[#{(x-1)*size+(y)}], lumberyards[#{(x-1)*size+(y)}]}"
+      top_right = "{trees[#{(x-1)*size+(y+1)}], lumberyards[#{(x-1)*size+(y+1)}]}"
+      left = "{trees[#{(x)*size+(y-1)}], lumberyards[#{(x)*size+(y-1)}]}"
+      right = "{trees[#{(x)*size+(y+1)}], lumberyards[#{(x)*size+(y+1)}]}"
+      bottom_left = "{trees[#{(x+1)*size+(y-1)}], lumberyards[#{(x+1)*size+(y-1)}]}"
+      bottom = "{trees[#{(x+1)*size+(y)}], lumberyards[#{(x+1)*size+(y)}]}"
+      bottom_right = "{trees[#{(x+1)*size+(y+1)}], lumberyards[#{(x+1)*size+(y+1)}]}"
+      if x == 0
+        top_left = "2'b0"
+        top = "2'b0"
+        top_right = "2'b0"
+      end
+      if x == (size - 1)
+        bottom_left = "2'b0"
+        bottom = "2'b0"
+        bottom_right = "2'b0"
+      end
+      if y == 0
+        top_left = "2'b0"
+        left = "2'b0"
+        bottom_left = "2'b0"
+      end
+      if y == (size - 1)
+        top_right = "2'b0"
+        right = "2'b0"
+        bottom_right = "2'b0"
+      end
+
+      o.puts("acre acre_#{x}_#{y} (.clk(clk), .en(en), .top_left(#{top_left}), " +
+        ".top(#{top}), .top_right(#{top_right}), .left(#{left}), " +
+        ".right(#{right}), .bottom_left(#{bottom_left}), .bottom(#{bottom}), " +
+        ".bottom_right(#{bottom_right}), .init(#{init}), .state({trees[#{x*size+y}], lumberyards[#{x*size+y}]}));")
+    end
+  end
+
+  o.puts("endmodule")
+  o.close
+end
 
 day01()
 day02()
 day03()
+day18()
