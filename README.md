@@ -37,3 +37,11 @@ make simulate-day01-part1
 make simulate-day01-part2
 ...
 ```
+
+## Results
+| day | iverilog    | icestick                        |
+| --- | ----------- | ------------------------------- |
+| 01  | parts 1 & 2 |                                 |
+| 02  | parts 1 & 2 |                                 |
+| 03  | parts 1 & 2 | parts 1 & 2 using external LEDs |
+| 18  | part 1      |                                 |
